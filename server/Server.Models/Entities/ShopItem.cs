@@ -19,6 +19,5 @@ namespace Server.Models.Entities
         public ShopItemStatus Status { get; set; } = ShopItemStatus.OnList; // default on list
         
         public DateTime CreatedAt { get; private set; }
-        public DateTime LastActionAt { get; set; }
     }
 }

@@ -19,6 +19,8 @@ namespace Server.Data
             modelBuilder.Entity<ShopList>().Property(p => p.ShortURL).HasMaxLength(15).IsRequired();
             modelBuilder.Entity<ShopList>().HasIndex(p => p.ShortURL).HasDatabaseName("Unique_ShortURL").IsUnique();
             modelBuilder.Entity<ShopList>().Property(p => p.CreatedAt).IsRequired();
+            modelBuilder.Entity<ShopList>().Property(p => p.LastActionAt).IsRequired(false);
+
 
             modelBuilder.Entity<ShopItem>().HasOne<ShopList>()
                         .WithMany(shopList => shopList.Items)

@@ -16,6 +16,7 @@ namespace Server.Models.Entities
         public string Name { get; set; }
         public string ShortURL { get; set; }
         public DateTime CreatedAt { get; private set; }
+        public DateTime LastActionAt { get; set; }
 
         public ICollection<ShopItem> Items { get; set; }
     }
