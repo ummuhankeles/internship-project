@@ -7,8 +7,11 @@ namespace Server.Models.Entities
     {
         public ShopList()
         {
+            var datetimeNow = DateTime.Now;
+
             ID = Guid.NewGuid();
-            CreatedAt = DateTime.Now;
+            CreatedAt = datetimeNow;
+            LastActionAt = datetimeNow;
         }
 
         public Guid ID { get; private set; }
