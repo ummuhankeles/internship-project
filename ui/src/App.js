@@ -11,8 +11,8 @@ function App() {
           <Route exact path="/">
             <Home/>
           </Route>
-          <Route>
-            <ShoppingList path="shopping-list"/>
+          <Route path="/shopping-list" component={ShoppingList}>
+            <ShoppingList/>
           </Route>
         </Switch>
       </Router>

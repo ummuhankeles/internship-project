@@ -61,7 +61,7 @@ function Home() {
             </label>
         </form>
         <div className="home-btn">
-            <Link to="shopping-list">
+            <Link to="/shopping-list">
                 <button 
                     style={homeContinueButton} 
                     className="btn btn-outline-success"
