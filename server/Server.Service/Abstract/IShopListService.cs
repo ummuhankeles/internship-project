@@ -11,6 +11,6 @@ namespace Server.Service.Abstract
         Task<ShopListResponse> InsertAsync(ShopListRequest value);
         Task<bool> UpdateAsync(ShopListRequest value);
         Task<ShopListResponse> GetById(Guid id);
-        Task<ShopListResponse> GetWithAllItemsById(Guid id);
+        Task<ShopListResponse> GetWithAllItemsByShortURL(string shortURL);
     }
 }

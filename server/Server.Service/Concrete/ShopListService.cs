@@ -7,6 +7,8 @@ using Server.Models.DTOs.Request;
 using Server.Models.DTOs.Response;
 using Server.Models.Entities;
 using Server.Service.Abstract;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Server.Service.Concrete
 {
@@ -28,9 +30,9 @@ namespace Server.Service.Concrete
             throw new NotImplementedException();
         }
 
-        public Task<ShopListResponse> GetWithAllItemsById(Guid id)
+        public async Task<ShopListResponse> GetWithAllItemsByShortURL(string shortURL)
         {
-            throw new NotImplementedException();
+            return mapper.Map<ShopListResponse>(await context.ShopLists.Include(x => x.Items).Where(x => x.ShortURL == shortURL).FirstOrDefaultAsync());
         }
 
         public async Task<ShopListResponse> InsertAsync(ShopListRequest value)
