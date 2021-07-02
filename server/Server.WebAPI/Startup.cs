@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
+using Server.Service.Concrete;
+using Server.Service.Abstract;
 
 namespace Server.WebAPI
 {
@@ -25,6 +27,12 @@ namespace Server.WebAPI
             {
                 options.UseNpgsql(Configuration.GetConnectionString("postgres"));
             });
+
+            
+            services.AddScoped<IShopListService, ShopListService>();
+            services.AddScoped<IShopItemService, ShopItemService>();
+
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
