@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Server.Models.Entities
 {
@@ -12,6 +13,8 @@ namespace Server.Models.Entities
             ID = Guid.NewGuid();
             CreatedAt = datetimeNow;
             LastActionAt = datetimeNow;
+
+            ShortURL = Path.GetRandomFileName().ToLower();
         }
 
         public Guid ID { get; private set; }
