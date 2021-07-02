@@ -16,7 +16,7 @@ namespace Server.WebAPI.Controllers
             shopListService = _shopListService;
         }
 
-        [HttpPost("")]
+        [HttpPost]
         public async Task<IActionResult> CreateList(ShopListRequest model)
         {
             var result = await shopListService.InsertAsync(model);
@@ -24,5 +24,12 @@ namespace Server.WebAPI.Controllers
             return result != null ? Ok(result) : BadRequest("");
         }
 
+        [HttpGet("{shortURL}")]
+        public async Task<IActionResult> GetWithAllItems(string shortURL)
+        {
+            var result = await shopListService.GetWithAllItemsByShortURL(shortURL);
+            //todo: get result as a response class
+            return result != null ? Ok(result) : BadRequest("");
+        }
     }
 }
