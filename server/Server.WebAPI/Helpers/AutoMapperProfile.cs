@@ -9,9 +9,11 @@ namespace Server.WebAPI.Helpers
     {
         public AutoMapperProfile()
         {
+            CreateMap<ShopItemRequest, ShopItem>();
             CreateMap<ShopListRequest, ShopList>();
 
             CreateMap<ShopList, ShopListResponse>();
+            CreateMap<ShopItem, ShopItemResponse>();
         }
     }
 }
