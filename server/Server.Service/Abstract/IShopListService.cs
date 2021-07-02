@@ -1,16 +1,13 @@
-using System;
 using System.Threading.Tasks;
+using Server.Models;
 using Server.Models.DTOs.Request;
-using Server.Models.DTOs.Response;
-using Server.Models.Entities;
 
 namespace Server.Service.Abstract
 {
     public interface IShopListService
     {
-        Task<ShopListResponse> InsertAsync(ShopListRequest value);
-        Task<bool> UpdateAsync(ShopListRequest value);
-        Task<ShopListResponse> GetById(Guid id);
-        Task<ShopListResponse> GetWithAllItemsByShortURL(string shortURL);
+        Task<ApiResponse> InsertAsync(ShopListRequest value);
+        Task<ApiResponse> UpdateAsync(string shortURL, ShopListRequest value);
+        Task<ApiResponse> GetWithAllItemsByShortURL(string shortURL);
     }
 }
