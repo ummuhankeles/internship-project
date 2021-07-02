@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Service.Concrete;
 using Server.Service.Abstract;
+using Server.WebAPI.Helpers;
 
 namespace Server.WebAPI
 {
@@ -32,7 +33,7 @@ namespace Server.WebAPI
             services.AddScoped<IShopListService, ShopListService>();
             services.AddScoped<IShopItemService, ShopItemService>();
 
-
+            services.AddAutoMapper(typeof(AutoMapperProfile));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
