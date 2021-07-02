@@ -9,6 +9,8 @@ using Server.Models.Entities;
 using Server.Service.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Server.Models;
+using Server.Models.Enums;
 
 namespace Server.Service.Concrete
 {
@@ -25,17 +27,14 @@ namespace Server.Service.Concrete
             logger = _logger;
         }
 
-        public Task<ShopListResponse> GetById(Guid id)
+        public async Task<ApiResponse> GetWithAllItemsByShortURL(string shortURL)
         {
-            throw new NotImplementedException();
+            return new ApiResponse(mapper.Map<ShopListResponse>(await context.ShopLists.Include(x => x.Items)
+                .Where(x => x.ShortURL == shortURL)
+                .FirstOrDefaultAsync()), ApiResponseType.Ok);
         }
 
-        public async Task<ShopListResponse> GetWithAllItemsByShortURL(string shortURL)
-        {
-            return mapper.Map<ShopListResponse>(await context.ShopLists.Include(x => x.Items).Where(x => x.ShortURL == shortURL).FirstOrDefaultAsync());
-        }
-
-        public async Task<ShopListResponse> InsertAsync(ShopListRequest value)
+        public async Task<ApiResponse> InsertAsync(ShopListRequest value)
         {
         re:
             var newShopList = mapper.Map<ShopList>(value);
@@ -43,22 +42,27 @@ namespace Server.Service.Concrete
 
             try
             {
-                if (await context.SaveChangesAsync() > 0)
-                {
-                    return mapper.Map<ShopListResponse>(newShopList);
-                }
-                return null;
+                await context.SaveChangesAsync();
             }
             catch (System.Exception ex)
             {
                 logger.LogWarning(ex.InnerException.Message);
                 goto re;
             }
+
+            return new ApiResponse(mapper.Map<ShopListResponse>(newShopList), ApiResponseType.Ok);
         }
 
-        public Task<bool> UpdateAsync(ShopListRequest value)
+        public async Task<ApiResponse> UpdateAsync(string shortURL, ShopListRequest value)
         {
-            throw new NotImplementedException();
+            var shopList = await context.ShopLists.FirstOrDefaultAsync(x => x.ShortURL == shortURL);
+            if (shopList == null)
+            {
+                return new ApiResponse(ApiResponseType.NotFound);
+            }
+            shopList.Name = value.Name;
+            await context.SaveChangesAsync();
+            return new ApiResponse(ApiResponseType.NoContent);
         }
     }
 }

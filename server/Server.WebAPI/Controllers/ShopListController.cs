@@ -7,7 +7,7 @@ namespace Server.WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ShopListController : ControllerBase
+    public class ShopListController : BaseController
     {
         private readonly IShopListService shopListService;
 
@@ -17,19 +17,21 @@ namespace Server.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateList(ShopListRequest model)
+        public async Task<IActionResult> CreateList([FromBody] ShopListRequest model)
         {
-            var result = await shopListService.InsertAsync(model);
-            //todo: get result as a response class
-            return result != null ? Ok(result) : BadRequest("");
+            return ApiReturn(await shopListService.InsertAsync(model));
         }
 
         [HttpGet("{shortURL}")]
-        public async Task<IActionResult> GetWithAllItems(string shortURL)
+        public async Task<IActionResult> GetWithAllItems([FromRoute] string shortURL)
         {
-            var result = await shopListService.GetWithAllItemsByShortURL(shortURL);
-            //todo: get result as a response class
-            return result != null ? Ok(result) : BadRequest("");
+            return ApiReturn(await shopListService.GetWithAllItemsByShortURL(shortURL));
+        }
+
+        [HttpPatch("{shortURL}")]
+        public async Task<IActionResult> UpdateList([FromRoute] string shortURL, [FromBody]ShopListRequest model)
+        {
+            return ApiReturn(await shopListService.UpdateAsync(shortURL, model));
         }
     }
 }
