@@ -8,10 +8,6 @@ namespace Server.Models
         {
             Type = _type;
         }
-        public ApiResponse(object _data)
-        {
-            Data = _data;
-        }
         public ApiResponse(object _data, ApiResponseType _type)
         {
             Data = _data;
@@ -19,6 +15,6 @@ namespace Server.Models
         }
 
         public object Data { get; set; } = null;
-        public ApiResponseType Type { get; set; } = ApiResponseType.Ok;
+        public ApiResponseType Type { get; set; }
     }
 }

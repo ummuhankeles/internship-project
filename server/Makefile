@@ -4,3 +4,5 @@ migrm:
 	cd ./Server.Data && dotnet ef migrations remove --startup-project ../Server.WebAPI/ && cd ..
 dbup:
 	cd ./Server.Data && dotnet ef --startup-project ../Server.WebAPI/ database update && cd ..
+wr: 
+	cd ./Server.WebAPI && dotnet watch run && cd ..

@@ -18,7 +18,7 @@ namespace Server.WebAPI.Controllers
                 case ApiResponseType.NoContent:
                     return NoContent();
                 case ApiResponseType.NotFound:
-                    return NotFound();
+                    return NotFound("Request processed at end-point but not found any object with identifier which you sent");
                 default:
                     return Accepted();
             }
