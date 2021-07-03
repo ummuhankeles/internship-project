@@ -29,7 +29,7 @@ namespace Server.WebAPI
                 options.UseNpgsql(Configuration.GetConnectionString("postgres"));
             });
 
-            
+
             services.AddScoped<IShopListService, ShopListService>();
             services.AddScoped<IShopItemService, ShopItemService>();
 
@@ -48,9 +48,10 @@ namespace Server.WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Server.WebAPI v1"));
             }
+            
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Server.WebAPI v1"));
 
             app.UseHttpsRedirection();
 
