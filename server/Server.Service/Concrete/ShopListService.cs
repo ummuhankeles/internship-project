@@ -27,11 +27,23 @@ namespace Server.Service.Concrete
             logger = _logger;
         }
 
+        public async Task<ShopList> GetByShortURL(string shortURL)
+        {
+            return await context.ShopLists.FirstOrDefaultAsync(x => x.ShortURL == shortURL);
+        }
+
         public async Task<ApiResponse> GetWithAllItemsByShortURL(string shortURL)
         {
-            return new ApiResponse(mapper.Map<ShopListResponse>(await context.ShopLists.Include(x => x.Items)
+            var data = await context.ShopLists.Include(x => x.Items)
                 .Where(x => x.ShortURL == shortURL)
-                .FirstOrDefaultAsync()), ApiResponseType.Ok);
+                .FirstOrDefaultAsync();
+
+            if (data == null)
+            {
+                return new ApiResponse(ApiResponseType.NotFound);
+            }
+
+            return new ApiResponse(mapper.Map<ShopListResponse>(data), ApiResponseType.Ok);
         }
 
         public async Task<ApiResponse> InsertAsync(ShopListRequest value)
@@ -49,7 +61,7 @@ namespace Server.Service.Concrete
                 logger.LogWarning(ex.InnerException.Message);
                 goto re;
             }
-
+            // should return object, because front-end app needs newShopList.shortURL
             return new ApiResponse(mapper.Map<ShopListResponse>(newShopList), ApiResponseType.Ok);
         }
 
