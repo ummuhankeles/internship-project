@@ -1,0 +1,11 @@
+body {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.shopping-list-input textarea {
+    font-size: 20px;
+    border-radius: 15px;
+    padding: 10px 20px;
+    width: 100%;
+    letter-spacing: 3px;
+}
