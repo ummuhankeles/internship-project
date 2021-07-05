@@ -1,6 +1,7 @@
 import React from 'react';
 import ShoppingListItem from '../shopping-list-item/ShoppingListItem';
 
+
 function ShoppingList(props) {
 
     const listItemStyle = {
@@ -16,7 +17,7 @@ function ShoppingList(props) {
                     props.todos.map((item) => {
                         return(
                             <li style={listItemStyle} className="col-sm-12 list-group-item mb-3">
-                                <ShoppingListItem {...item} key={item.id} />
+                                <ShoppingListItem {...item} key={item.id} deleteItem={props.deleteItem} />
                             </li>
                         )
                     })

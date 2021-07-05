@@ -26,7 +26,7 @@ class App extends Component {
       {
         todos: [...this.state.todos, itemData]
       }
-      );
+    );
     } else {
       alert("Please, enter input !")
     }
@@ -50,6 +50,13 @@ class App extends Component {
     });
   }
 
+  // delete item
+  deleteItem = (id) => {
+    const currentValue = [...this.state.todos];
+    const newVal = currentValue.filter(item => item.id !== id);
+    this.setState({ todos: newVal })
+  }
+
   render() {
     return (
       <div className="container">
@@ -65,7 +72,7 @@ class App extends Component {
                 dataChange={this.dataChange}
                 handleDelete={this.handleDelete}
               />
-              <ShoppingList todos={this.state.todos}/>
+              <ShoppingList todos={this.state.todos} deleteItem={this.deleteItem}  />
             </Route>
           </Switch>
         </Router>
