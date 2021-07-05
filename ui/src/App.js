@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './components/home/Home';
 import ShoppingListForm from './components/shopping-list-form/ShoppingListForm';
+import ShoppingList from './components/shopping-list/ShoppingList';
 
 class App extends Component {
 
@@ -64,6 +65,7 @@ class App extends Component {
                 dataChange={this.dataChange}
                 handleDelete={this.handleDelete}
               />
+              <ShoppingList todos={this.state.todos}/>
             </Route>
           </Switch>
         </Router>
