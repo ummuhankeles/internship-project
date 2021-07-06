@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "../home/Home.css";
 
-function Home() {
-
-    const [input, setInput] = useState("");
+function Home({input, setInput}) {
 
     const homeInputButton = {
         width: '500px',
@@ -56,7 +54,7 @@ function Home() {
                 type="text"
                 value={input}
                 name="input"
-                onChange={(e) => setInput(e.target.value)}
+                onChange={setInput}
             />
             </label>
         </form>

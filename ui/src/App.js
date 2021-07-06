@@ -3,30 +3,40 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './components/home/Home';
 import ShoppingListForm from './components/shopping-list-form/ShoppingListForm';
 import ShoppingList from './components/shopping-list/ShoppingList';
+import Content from './components/content/Content';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      input: "",
       itemData: "",
-      todos: [],
+      todos: []
     };
+  }
+
+  // set home page input
+  setInput = (e) => {
+    const newVal = e.target.value;
+    this.setState({
+      input: newVal,
+    });
   }
 
   // add item
   handleCreate = () => {
     const currentValue = this.state.itemData;
     if(this.state.itemData !== "") {
-    const itemData = {
-      id: Math.random(),
-      content: currentValue,
-    }
-    this.setState(
-      {
-        todos: [...this.state.todos, itemData]
+      const itemData = {
+        id: Math.random(),
+        content: currentValue,
       }
-    );
+      this.setState(
+        {
+          todos: [...this.state.todos, itemData]
+        }
+      );
     } else {
       alert("Please, enter input !")
     }
@@ -63,16 +73,26 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/">
-              <Home/>
+              <Home 
+                input={this.state.input}
+                setInput={this.setInput}
+              />
             </Route>
             <Route path="/shopping-list" component={ShoppingListForm}>
-              <ShoppingListForm 
+              <Content 
+                input={this.state.input} 
+              />
+              <ShoppingListForm
                 itemData={this.state.itemData} 
                 handleCreate={this.handleCreate}
                 dataChange={this.dataChange}
                 handleDelete={this.handleDelete}
               />
-              <ShoppingList todos={this.state.todos} deleteItem={this.deleteItem}  />
+              <ShoppingList 
+                todos={this.state.todos} 
+                deleteItem={this.deleteItem} 
+                editItem={this.editItem} 
+              />
             </Route>
           </Switch>
         </Router>
