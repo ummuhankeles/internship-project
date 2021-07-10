@@ -29,6 +29,15 @@ namespace Server.WebAPI
                 options.UseNpgsql(Configuration.GetConnectionString("postgres"));
             });
 
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyHeader();
+                    builder.AllowAnyOrigin();
+                });
+            });
 
             services.AddScoped<IShopListService, ShopListService>();
             services.AddScoped<IShopItemService, ShopItemService>();
@@ -49,7 +58,7 @@ namespace Server.WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+            app.UseCors();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Server.WebAPI v1"));
 
