@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../home/Home.css";
 
-function Home({input, setInput}) {
+function Home({input, setInput, handleClick}) {
 
     const homeInputButton = {
         width: '500px',
@@ -15,12 +15,6 @@ function Home({input, setInput}) {
         width: '500px',
         padding: '7px',
         borderRadius: '15px',
-    }
-
-    function handleClick() {
-        if(input === '' || input === null) {
-            alert("Please enter the input !");
-        }
     }
 
     function handleSubmit(e) {
@@ -61,6 +55,7 @@ function Home({input, setInput}) {
         <div className="home-btn">
             <Link to="/shopping-list">
                 <button 
+                    type="submit"
                     style={homeContinueButton} 
                     className="btn btn-outline-success"
                     onClick={handleClick}
