@@ -7,7 +7,7 @@ using Server.Service.Abstract;
 namespace Server.WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("shoplists/{shortURL}/items")]
     public class ShopItemController : BaseController
     {
         private readonly IShopItemService shopItemService;
@@ -17,7 +17,7 @@ namespace Server.WebAPI.Controllers
             shopItemService = _shopItemService;
         }
 
-        [HttpPost("{shortURL}")]
+        [HttpPost]
         public async Task<IActionResult> Post([FromRoute] string shortURL, [FromBody] ShopItemRequest model)
         {
             return ApiReturn(await shopItemService.InsertAsync(shortURL, model));

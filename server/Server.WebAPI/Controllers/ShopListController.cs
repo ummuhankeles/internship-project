@@ -6,7 +6,7 @@ using Server.Service.Abstract;
 namespace Server.WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("shoplists")]
     public class ShopListController : BaseController
     {
         private readonly IShopListService shopListService;
