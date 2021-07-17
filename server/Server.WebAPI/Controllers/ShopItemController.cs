@@ -23,7 +23,7 @@ namespace Server.WebAPI.Controllers
             return ApiReturn(await shopItemService.InsertAsync(shortURL, model));
         }
 
-        [HttpPatch("{shopItemID}")]
+        [HttpPut("{shopItemID}")]
         public async Task<IActionResult> Patch([FromRoute] Guid shopItemID, [FromBody] ShopItemRequest model)
         {
             return ApiReturn(await shopItemService.UpdateAsync(shopItemID, model));
