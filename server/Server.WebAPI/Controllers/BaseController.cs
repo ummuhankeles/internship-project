@@ -9,19 +9,14 @@ namespace Server.WebAPI.Controllers
         [NonAction]
         public IActionResult ApiReturn(ApiResponse response)
         {
-            switch (response.Type)
+            return response.Type switch
             {
-                case ApiResponseType.Created:
-                    return StatusCode(201);
-                case ApiResponseType.Ok:
-                    return Ok(response.Data);
-                case ApiResponseType.NoContent:
-                    return NoContent();
-                case ApiResponseType.NotFound:
-                    return NotFound("Request processed at end-point but not found any object with identifier which you sent");
-                default:
-                    return Accepted();
-            }
+                ApiResponseType.Ok              => Ok(new { response.Data }),
+                ApiResponseType.NotFound        => NotFound("Request processed at end-point but not found any object with identifier which you sent"),
+                ApiResponseType.NoContent       => NoContent(),
+                ApiResponseType.Created         => StatusCode(201),
+                _                               => Accepted()
+            };
         }
     }
 }

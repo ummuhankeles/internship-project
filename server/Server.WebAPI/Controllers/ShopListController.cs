@@ -28,7 +28,7 @@ namespace Server.WebAPI.Controllers
             return ApiReturn(await shopListService.GetWithAllItemsByShortURL(shortURL));
         }
 
-        [HttpPatch("{shortURL}")]
+        [HttpPut("{shortURL}")]
         public async Task<IActionResult> UpdateList([FromRoute] string shortURL, [FromBody]ShopListRequest model)
         {
             return ApiReturn(await shopListService.UpdateAsync(shortURL, model));

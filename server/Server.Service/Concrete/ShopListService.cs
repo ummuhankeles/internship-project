@@ -43,7 +43,7 @@ namespace Server.Service.Concrete
                 return new ApiResponse(ApiResponseType.NotFound);
             }
 
-            return new ApiResponse(mapper.Map<ShopListResponse>(data), ApiResponseType.Ok);
+            return new ApiResponse(ApiResponseType.Ok, mapper.Map<ShopListResponse>(data));
         }
 
         public async Task<ApiResponse> InsertAsync(ShopListRequest value)
@@ -62,7 +62,7 @@ namespace Server.Service.Concrete
                 goto re;
             }
             // should return object, because front-end app needs newShopList.shortURL
-            return new ApiResponse(mapper.Map<ShopListResponse>(newShopList), ApiResponseType.Ok);
+            return new ApiResponse(ApiResponseType.Ok, mapper.Map<ShopListResponse>(newShopList));
         }
 
         public async Task<ApiResponse> UpdateAsync(string shortURL, ShopListRequest value)

@@ -42,14 +42,14 @@ namespace Server.Service.Concrete
             }
 
             var newShopItem = mapper.Map<ShopItem>(value);
-            
+
             newShopItem.ShopListId = shopList.ID;
             newShopItem.Status = ShopItemStatus.OnList;
 
             await context.AddAsync(newShopItem);
             await context.SaveChangesAsync();
 
-            return new ApiResponse(mapper.Map<ShopItemResponse>(newShopItem), ApiResponseType.Ok);
+            return new ApiResponse(ApiResponseType.Ok, mapper.Map<ShopItemResponse>(newShopItem));
         }
 
         public async Task<ApiResponse> UpdateAsync(Guid shopItemID, ShopItemRequest value)
@@ -64,7 +64,7 @@ namespace Server.Service.Concrete
             shopItem.Definition = value.Definition;
             shopItem.Status = value.Status;
             await context.SaveChangesAsync();
-            
+
             return new ApiResponse(ApiResponseType.NoContent);
         }
     }
